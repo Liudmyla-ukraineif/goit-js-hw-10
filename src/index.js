@@ -28,11 +28,23 @@ function renderCardCountry(countries) {
   if (countries.length === 0) {
     inputClear()
   } else if (countries.length === 1) {
-    return refs.infoCountry.insertAdjacentHTML('beforeend', listTpl(countries[0]))
+    inputClear()
+    return refs.infoCountry.insertAdjacentHTML('beforeend', countryTpl(countries[0]))
   } else if (countries.length > 1 && countries.length < 11) {
-    return refs.listCountries.insertAdjacentHTML('beforeend', countryTpl({ name, capital, population, flags, languages }))
+    inputClear()
+    return refs.listCountries.insertAdjacentHTML('beforeend', listTpl({ name, capital, population, flags, languages }))
   } else return Notiflix.Notify.info('Too many matches found. Please enter a more specific name.')
 }
+
+function inputClear() {
+  refs.listCountries.innerHTML = '';
+  refs.infoCountry.innerHTML = '';
+}
+
+function errorMeseges() {
+  Notiflix.Notify.failure('Oops, there is no country with that name')
+}
+
 
 
 // function createMarkup({ name, capital, population, flags, languages }) {
@@ -51,12 +63,3 @@ function renderCardCountry(countries) {
 //   <h2><span class="name-card">Offficial name: </span>${name.official}</h2></li>`
 //   ).join("");
 // }
-
-function inputClear() {
-  refs.listCountries.innerHTML = '';
-  refs.infoCountry.innerHTML = '';
-}
-
-function errorMeseges() {
-  Notiflix.Notify.failure('Oops, there is no country with that name')
-}

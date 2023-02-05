@@ -8,7 +8,7 @@ export default class InfoApiServis {
     const URL = 'https://restcountries.com/v3.1/name/';
 
     return fetch(`${URL}${this.searchCountry}?fields=name,capital,region,population,flags,languages`)
-      .then(response => { response.json() })
+      .then(response => response.json())
       .then(countries => { return countries })
   }
 
