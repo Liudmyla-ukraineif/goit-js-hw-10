@@ -29,11 +29,14 @@ function renderCardCountry(countries) {
     inputClear()
   } else if (countries.length === 1) {
     inputClear()
-    return refs.infoCountry.insertAdjacentHTML('beforeend', countryTpl(countries[0]))
+    return refs.infoCountry.insertAdjacentHTML('beforeend', countryTpl(countries))
   } else if (countries.length > 1 && countries.length < 11) {
     inputClear()
-    return refs.listCountries.insertAdjacentHTML('beforeend', listTpl({ name, capital, population, flags, languages }))
-  } else return Notiflix.Notify.info('Too many matches found. Please enter a more specific name.')
+    return refs.listCountries.insertAdjacentHTML('beforeend', listTpl(countries))
+  } else if (countries.length > 10) {
+    inputClear()
+    return Notiflix.Notify.info('Too many matches found. Please enter a more specific name.')
+  } else errorMeseges()
 }
 
 function inputClear() {
@@ -42,24 +45,6 @@ function inputClear() {
 }
 
 function errorMeseges() {
+  inputClear()
   Notiflix.Notify.failure('Oops, there is no country with that name')
 }
-
-
-
-// function createMarkup({ name, capital, population, flags, languages }) {
-//   const lang = Object.values(languages).join(', ');
-//   const markup = `<img src="${flags.svg}" width="30" , height="20">
-//   <h2>${name.official}</h2>
-//   <p><span>Capital: </span>${capital}</p>
-//   <p><span>Population: </span>${population}</p>
-//   <p><span>Languages: </span>${lang}</p>`;
-//   countryCard.insertAdjacentHTML('beforeend', markup);
-// }
-
-
-// function list(countries) {
-//   return countries.map(({ name, flags }) => `<li><img src="${flags.png}" alt="flag" height="80"> 
-//   <h2><span class="name-card">Offficial name: </span>${name.official}</h2></li>`
-//   ).join("");
-// }
