@@ -1,14 +1,9 @@
 {{#each this}}
 <div class="card-country">
-  <img src="{{flags.svg}}" alt="{{name.common}}", height="100">
+  <img src="{{flags.svg}}" alt="{{name.common}}", height="60">
   <h2>Official name country: {{name.official}}</h2>
   <p><span class="titel-list">Capital: </span>{{capital}}</p>
   <p><span class="titel-list">Population: </span>{{population}}</p>
-  <p><span class="titel-list land-list">Languages: </span> </p>
-  <ul>
-  {{#each languages}}
-    <li class="lang">{{this}}</li>
-  {{/each}}
-  </ul>
+  <p><span class="titel-list">Languages: </span> {{#each languages}} <span> {{#if @last}}{{this}} {{else}}{{this}}, {{/if}} </span> {{/each}}</p>
 </div>
 {{/each}}
