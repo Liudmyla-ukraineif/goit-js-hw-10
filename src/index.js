@@ -18,6 +18,10 @@ const infoApiServis = new InfoApiServis;
 refs.country.addEventListener('input', debounce(onTakeCountry, DEBOUNCE_DELAY))
 
 function onTakeCountry(e) {
+  if (e.target.value.trim().length === 0) {
+    return errorMeseges()
+  }
+
   infoApiServis.query = e.target.value.trim();
 
   infoApiServis.fetchCountry().then(renderCardCountry).catch(errorMeseges)
@@ -25,9 +29,7 @@ function onTakeCountry(e) {
 
 function renderCardCountry(countries) {
 
-  if (countries.length === 0) {
-    inputClear()
-  } else if (countries.length === 1) {
+  if (countries.length === 1) {
     inputClear()
     return refs.infoCountry.insertAdjacentHTML('beforeend', countryTpl(countries))
   } else if (countries.length > 1 && countries.length < 11) {
